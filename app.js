@@ -2,6 +2,18 @@ var express = require('express');
 var app = express();
 var engine = require('ejs-locals');
 var bodyParser = require('body-parser');
+var admin = require("firebase-admin");
+
+var serviceAccount = require("./project-147df-firebase-adminsdk-bg97v-327f48e27d.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://project-147df.firebaseio.com"
+});
+
+var fireData = admin.database();
+console.log(fireData);
+
 app.engine('ejs',engine);
 app.set('views','./views');
 app.set('view engine','ejs');
