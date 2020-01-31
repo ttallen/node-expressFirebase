@@ -12,7 +12,9 @@ admin.initializeApp({
 });
 
 var fireData = admin.database();
-console.log(fireData);
+fireData.ref('todos').once('value',function(snapshot){
+  console.log(snapshot.val());
+})
 
 app.engine('ejs',engine);
 app.set('views','./views');
