@@ -13,7 +13,6 @@ admin.initializeApp({
 
 var fireData = admin.database();
 
-
 app.engine('ejs',engine);
 app.set('views','./views');
 app.set('view engine','ejs');
@@ -27,15 +26,9 @@ app.use(bodyParser.urlencoded({extended:false}))
 //路由
 app.get('/',function(req,res){
    fireData.ref('todos').once('value',function(snapshot){
-   var data = snapshot.val().content;
-   res.render('index',{"content":hello});
-  })
-})
-
-// 新增完資料就會執行then裡面的function
-fireData.ref('todos').set({"content":'hello!'}).then(function(){
-  fireData.ref('todos').once('value',function(snapshot){
-    console.log(snapshot.val());
+   var data = snapshot.val();
+   var content = data.content;
+   res.render('index',{"content":content});
   })
 });
 
