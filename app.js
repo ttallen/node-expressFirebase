@@ -27,8 +27,8 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.get('/',function(req,res){
    fireData.ref('todos').once('value',function(snapshot){
    var data = snapshot.val();
-   var content = data.content;
-   res.render('index',{"content":content});
+   var title = data.title;
+   res.render('index',{"title":title});
   })
 });
 
