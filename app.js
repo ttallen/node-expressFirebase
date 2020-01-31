@@ -12,9 +12,7 @@ admin.initializeApp({
 });
 
 var fireData = admin.database();
-fireData.ref('todos').once('value',function(snapshot){
-  console.log(snapshot.val());
-})
+
 
 app.engine('ejs',engine);
 app.set('views','./views');
@@ -28,9 +26,18 @@ app.use(bodyParser.urlencoded({extended:false}))
 
 //路由
 app.get('/',function(req,res){
-   res.render('index');
-    
+   fireData.ref('todos').once('value',function(snapshot){
+   var data = snapshot.val().content;
+   res.render('index',{"content":hello});
+  })
 })
+
+// 新增完資料就會執行then裡面的function
+fireData.ref('todos').set({"content":'hello!'}).then(function(){
+  fireData.ref('todos').once('value',function(snapshot){
+    console.log(snapshot.val());
+  })
+});
 
 // 監聽 port
 var port = process.env.PORT || 3000;
