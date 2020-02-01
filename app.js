@@ -32,6 +32,23 @@ app.get('/',function(req,res){
   })
 });
 
+// 新增邏輯
+app.post('/addTodo',function(req,res){
+  var content = req.body.content;
+  var contentRef = fireData.ref('todos').push();
+  contentRef.set({"content":content}).then(function(){
+    fireData.ref('todos').once('value',function(snapshot){
+      res.send(
+        {
+          "success": true,
+          "result": snapshot.val(),
+          "message": "讀取成功!"
+        }
+      );
+    })
+  })
+})
+
 // 監聽 port
 var port = process.env.PORT || 3000;
 app.listen(port);
