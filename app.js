@@ -26,9 +26,8 @@ app.use(bodyParser.urlencoded({extended:false}))
 //路由
 app.get('/',function(req,res){
    fireData.ref('todos').once('value',function(snapshot){
-   var data = snapshot.val();
-   var title = data.title;
-   res.render('index',{"title":title});
+      var data = snapshot.val();
+      res.render('index',{"todolist":data});
   })
 });
 
