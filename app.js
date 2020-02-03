@@ -49,6 +49,21 @@ app.post('/addTodo',function(req,res){
   })
 })
 
+app.post('/removeTodo',function(req,res){
+  var id_ = req.body.id;
+  fireData.ref('todos').child(id_).remove().then(function(){
+    fireData.ref('todos').once('value',function(snapshot){
+      res.send(
+        {
+          "success": true,
+          "result": snapshot.val(),
+          "message": "資料刪除成功!"
+        }
+      )
+    })
+  })
+})
+
 // 監聽 port
 var port = process.env.PORT || 3000;
 app.listen(port);
