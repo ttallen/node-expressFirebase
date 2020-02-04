@@ -10,7 +10,7 @@
     <h1>代辦事項:</h1>
     <input type="text" id="content" name="content">
     <input type="submit" id="send" value="儲存">
-    <ul>
+    <ul id="list">
         <% for(item in todolist){ %>
             <li><%- todolist[item].content %>
             <input type="button" value="刪除"></li>

@@ -41,7 +41,7 @@ app.post('/addTodo',function(req,res){
         {
           "success": true,
           "result": snapshot.val(),
-          "message": "讀取成功!"
+          "message": "請稍後再試!"
         }
       );
     })
