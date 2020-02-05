@@ -13,7 +13,7 @@
     <ul id="list">
         <% for(item in todolist){ %>
             <li><%- todolist[item].content %>
-            <input type="button" value="刪除"></li>
+            <input type="button" data-id="<%- item %>" value="刪除"></li>
         <% } %>
     </ul>
     <script src="/js/all.js"></script>
